@@ -5,10 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
 )
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin);
+	cfg := &config{}
+	client := pokeapi.NewClient()
+
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
@@ -21,7 +25,7 @@ func startRepl() {
 
 		command, exists := getCommands()[commandName]
 			if exists {
-				err := command.callback()
+				err := command.callback(cfg, client)
 				if err != nil {
 					fmt.Println(err)
 				}

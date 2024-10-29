@@ -1,8 +1,11 @@
 package main
 
-import "os"
+import (
+	"os"
+	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
+)
 
-func callbackExit() error{
+func commandExit(cfg *config, client *pokeapi.Client) error{
 	os.Exit(0)
 	return nil
 }

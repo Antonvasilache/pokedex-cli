@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
+)
 
-func callbackHelp() error{
+func commandHelp(cfg *config, client *pokeapi.Client) error{
 	fmt.Println()
 	fmt.Println("welcome to the Pokedex")
  	fmt.Println("Usage:")
