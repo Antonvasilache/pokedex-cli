@@ -1,5 +1,7 @@
 package pokeapi
 
+import "github.com/Antonvasilache/pokedex-cli/internal/pokecache"
+
 type LocationsAreaResp struct {
 	Count		int			`json:"count"`
 	Next		*string		`json:"next"`
@@ -13,5 +15,6 @@ type Location struct {
 }
 
 type Client struct {
+	cache 	*pokecache.Cache
 	baseURL string
 }

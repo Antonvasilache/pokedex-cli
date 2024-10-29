@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
 )
 
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin);
 	cfg := &config{}
-	client := pokeapi.NewClient()
+	client := pokeapi.NewClient(time.Hour)
 
 	for {
 		fmt.Print("Pokedex > ")
