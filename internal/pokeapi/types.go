@@ -325,7 +325,7 @@ type Pokemon struct {
 		Slot int `json:"slot"`
 		Type struct {
 			Name string `json:"name"`
-			URL  string `json:"url"`
+			URL  string `json:"url"`	
 		} `json:"type"`
 	} `json:"types"`
 	Weight int `json:"weight"`

@@ -4,11 +4,15 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-
 	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
 )
 
 func commandCatch(cfg *config, client *pokeapi.Client, parameter string) error{	
+	//check if parameter is empty
+	if parameter == "" {
+		return fmt.Errorf("you must provide a pokemon name")
+	}
+	
 	//check if we already have the pokemon
 	if _, ok := cfg.Pokedex[parameter]; ok {
 		fmt.Printf("%s already exists in your Pokedex\n", parameter)

@@ -6,6 +6,11 @@ import (
 )
 
 func commandExplore(cfg *config, client *pokeapi.Client, parameter string) error {
+	//check if parameter is empty
+	if parameter == "" {
+		return fmt.Errorf("you must provide a location area name")
+	}
+
 	resp, err := client.GetLocationAreaDetails(parameter)
 	if err != nil {
 		return err
