@@ -24,9 +24,14 @@ func startRepl() {
 
 		commandName := input[0]
 
+		var commandParameter string
+		if len(input) > 1 {
+			commandParameter = input[1]
+		}			
+
 		command, exists := getCommands()[commandName]
 			if exists {
-				err := command.callback(cfg, client)
+				err := command.callback(cfg, client, commandParameter)
 				if err != nil {
 					fmt.Println(err)
 				}

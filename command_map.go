@@ -5,7 +5,7 @@ import (
 	"github.com/Antonvasilache/pokedex-cli/internal/pokeapi"
 )
 
-func commandMap(cfg *config, client *pokeapi.Client) error{
+func commandMap(cfg *config, client *pokeapi.Client, parameter string) error{
 	resp, err := client.GetLocationAreas(cfg.Next)
 	if err != nil {
 		return err
@@ -21,7 +21,7 @@ func commandMap(cfg *config, client *pokeapi.Client) error{
 	return nil
 }
 
-func commandMapb(cfg *config, client *pokeapi.Client) error{
+func commandMapb(cfg *config, client *pokeapi.Client, parameter string) error{
 	if cfg.Previous == nil || *cfg.Previous == "" {
 		return fmt.Errorf("no previous pages to display")
 	}
