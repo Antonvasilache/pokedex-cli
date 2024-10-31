@@ -10,8 +10,9 @@ import (
 )
 
 func startRepl() {
-	scanner := bufio.NewScanner(os.Stdin);
 	cfg := &config{}
+	cfg.Pokedex = map[string]pokeapi.Pokemon{}
+	scanner := bufio.NewScanner(os.Stdin);
 	client := pokeapi.NewClient(time.Hour)
 
 	for {

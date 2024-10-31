@@ -6,7 +6,6 @@ import (
 	"io"
 	"net/http"
 	"time"
-
 	"github.com/Antonvasilache/pokedex-cli/internal/pokecache"
 )
 
@@ -91,4 +90,40 @@ func (c* Client) GetLocationAreaDetails(locationAreaNameOrId string) (LocationAr
 	c.cache.Add(endpoint, data)
 
 	return details, nil
+}
+
+func (c* Client) GetPokemonInfo(pokemonNameOrId string)(Pokemon, error){
+	endpoint := fmt.Sprintf("%s/pokemon/%s", c.baseURL, pokemonNameOrId)
+
+	//check the cache
+	data, ok := c.cache.Get(endpoint)
+	if ok {
+		//cache hit
+		var info Pokemon
+		err := json.Unmarshal(data, &info)
+		if err != nil {
+			return Pokemon{}, err
+		}
+		return info, nil
+	}
+
+	res, err := http.Get(endpoint)
+	if err != nil {
+		return Pokemon{}, err
+	}
+	defer res.Body.Close()
+
+	data, err = io.ReadAll(res.Body)
+	if err != nil {
+		return Pokemon{}, err
+	}
+	var info Pokemon
+		err = json.Unmarshal(data, &info)
+		if err != nil {
+			return Pokemon{}, err
+		}
+
+	c.cache.Add(endpoint, data)
+
+	return info, nil
 }

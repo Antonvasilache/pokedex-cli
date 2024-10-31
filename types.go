@@ -11,4 +11,5 @@ type cliCommand struct {
 type config struct {
 	Next 		*string
 	Previous 	*string
+	Pokedex		map[string]pokeapi.Pokemon
 }
